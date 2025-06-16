@@ -17,7 +17,7 @@ ifdef GBDK_DEBUG
 endif
 
 # You can set the name of the .gb ROM file here
-PROJECTNAME := Example
+PROJECTNAME := SuperSpacePrincess3
 
 SRCDIR      := src
 INCLUDEDIR  := headers
