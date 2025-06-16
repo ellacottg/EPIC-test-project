@@ -23,8 +23,8 @@ SRCDIR      := src
 INCLUDEDIR  := headers
 OBJDIR      := obj
 BINS	    := $(OBJDIR)/$(PROJECTNAME).gb
-CSOURCES    := $(wildcard src/*.c) $(wildcard src/graphics/*.c)
-ASMSOURCES  := $(wildcard src/*.s) $(wildcard src/graphics/*.s)
+CSOURCES    := $(wildcard src/*.c) $(wildcard src/graphics/*.c) $(wildcard src/levels/*.c)
+ASMSOURCES  := $(wildcard src/*.s) $(wildcard src/graphics/*.s) $(wildcard src/levels/*.s)
 
 all: $(BINS)
 

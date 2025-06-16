@@ -2,6 +2,7 @@
 #include <gb/cgb.h>
 #include <gb/metasprites.h>
 #include <stdint.h>
+#include "camera.h"
 #include "maeve.h"
 #include "common.h"
 
@@ -9,8 +10,11 @@ void main(void)
 {
     DISPLAY_ON;
     SHOW_SPRITES;
+    SHOW_BKG;
 
     uint8_t lastSprite = 0;
+
+    init_camera(0, 0);
 
     SetupMaeve();
 
