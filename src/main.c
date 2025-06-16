@@ -16,6 +16,8 @@ void main(void)
 
     // Loop forever
     while(1) {
+        lastSprite = 0;
+
         // Save the current state of the joypad
         // it's important NOT to call the joypad function more than once
         joypadCurrent = joypad();
