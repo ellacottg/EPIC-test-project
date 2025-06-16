@@ -31,6 +31,9 @@ extern uint8_t joypadCurrent, joypadPrevious, fourFrameRealValue;
 uint16_t maeveX, maeveY;
 uint8_t maeveFlip = FALSE;
 
+enum State maeveState = STATE_IDLE;
+enum State previousMaeveState = STATE_IDLE;
+
 int8_t maeveXSpeed = 0;
 int8_t maeveYSpeed = 0;
 uint8_t maeveMoving = FALSE;
@@ -74,6 +77,7 @@ void LoadSprite(void)
 
 uint8_t UpdateMaeve(void)
 {
+    previousMaeveState = maeveState;
     maeveMoving = FALSE;
 
     // get the inputs and accelerate
@@ -168,46 +172,25 @@ uint8_t UpdateMaeve(void)
         }
     }
 
-    // check if animatiions need to be changed
-    // set the proper animations
-    if (!maeveGrounded) //jumping
-    {
-        if (maeveShooting) //jumping and shooting
-        {
-            maeveMetaSprite = maeveSprite_metasprites[MAEVE_JUMP_SHOOT_ANIM_START];
-        }
-        else //jumping and not shooting
-        {
-            maeveMetaSprite = maeveSprite_metasprites[MAEVE_JUMP_ANIM_START];
-        }
+    //set the state based on the inputs
+    if(maeveShooting){
+        if (!maeveGrounded) maeveState = STATE_JUMPING_SHOOTING;
+        else if (maeveMoving) maeveState = STATE_WALKING_SHOOTING;
+        else maeveState = STATE_SHOOTING;
     }
-    else if (maeveMoving) //running
+    else
     {
-        if (maeveShooting) //running and shooting
-        {
-            maeveMetaSprite = maeveSprite_metasprites[fourFrameRealValue + MAEVE_WALK_SHOOT_ANIM_START];
-        }
-        else //running and not shooting
-        {
-            //we need to use the fourFrameRealValue to determine which of the four frames to use
-            //this is so that we can have a smooth animation
-            //the fourFrameRealValue is 0-3, so we can use it to index into the four frames of the running animation
-            maeveMetaSprite = maeveSprite_metasprites[fourFrameRealValue + MAEVE_WALK_ANIM_START];
-        }
-    }
-    else //standing still
-    {
-        if (maeveShooting) //standing still and shooting
-        {
-            maeveMetaSprite = maeveSprite_metasprites[MAEVE_SHOOT_ANIM_START];
-        }
-        else{
-            maeveMetaSprite = maeveSprite_metasprites[MAEVE_IDLE_ANIM_START];
-        }
+        if (!maeveGrounded) maeveState = STATE_JUMPING;
+        else if (maeveMoving) maeveState = STATE_WALKING;
+        else maeveState = STATE_IDLE;
     }
 
-    //
-    LoadSprite();
+    // check if animations need to be changed
+    if (maeveState != previousMaeveState || fourFrameChanged)
+    {
+        // if the state has changed, set the new animation
+        setAnimation(maeveState);
+    }
 
     //We're going to draw only one of the first two sprites, depending on if she's shooting or not
     layout = maeveSprite_layout[0];
@@ -218,4 +201,30 @@ uint8_t UpdateMaeve(void)
     }else{
         return move_metasprite_ex(layout, 0, 0, 0, maeveX >> 4, maeveY >> 4);
     }
+}
+
+void setAnimation(enum State state)
+{
+    switch (state)
+    {
+        case STATE_IDLE:
+            maeveMetaSprite = maeveSprite_metasprites[MAEVE_IDLE_ANIM_START];
+            break;
+        case STATE_WALKING:
+            maeveMetaSprite = maeveSprite_metasprites[MAEVE_WALK_ANIM_START + fourFrameRealValue];
+            break;
+        case STATE_JUMPING:
+            maeveMetaSprite = maeveSprite_metasprites[MAEVE_JUMP_ANIM_START];
+            break;
+        case STATE_SHOOTING:
+            maeveMetaSprite = maeveSprite_metasprites[MAEVE_SHOOT_ANIM_START];
+            break;
+        case STATE_WALKING_SHOOTING:
+            maeveMetaSprite = maeveSprite_metasprites[MAEVE_WALK_SHOOT_ANIM_START + fourFrameRealValue];
+            break;
+        case STATE_JUMPING_SHOOTING:
+            maeveMetaSprite = maeveSprite_metasprites[MAEVE_JUMP_SHOOT_ANIM_START];
+    }
+
+    LoadSprite();
 }
