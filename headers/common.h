@@ -3,6 +3,6 @@
 
 void UpdateFourFrameCounter(void);
 
-extern uint8_t joypadCurrent, joypadPrevious, fourFrameRealValue;
+extern uint8_t joypadCurrent, joypadPrevious, fourFrameRealValue, fourFrameChanged;
 
 #endif
