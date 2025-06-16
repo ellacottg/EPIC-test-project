@@ -175,7 +175,8 @@ const metasprite_t maeveSprite_metasprite1[] = {
 	METASPR_ITEM(0, 8, 1, S_PAL(0)),
 	METASPR_ITEM(8, -8, 2, S_PAL(0)),
 	METASPR_ITEM(0, 8, 7, S_PAL(0)),
-	METASPR_ITEM(8, -8, 5, S_PAL(0)),
+	METASPR_ITEM(0, 8, 4, S_PAL(0)),
+	METASPR_ITEM(8, -16, 5, S_PAL(0)),
 	METASPR_ITEM(0, 8, 8, S_PAL(0)),
 	METASPR_TERM
 };
@@ -185,7 +186,8 @@ const metasprite_t maeveSprite_metasprite2[] = {
 	METASPR_ITEM(0, 8, 10, S_PAL(0)),
 	METASPR_ITEM(8, -8, 11, S_PAL(0)),
 	METASPR_ITEM(0, 8, 12, S_PAL(0)),
-	METASPR_ITEM(8, -8, 13, S_PAL(0)),
+	METASPR_ITEM(0, 8, 4, S_PAL(0)),
+	METASPR_ITEM(8, -16, 13, S_PAL(0)),
 	METASPR_ITEM(0, 8, 14, S_PAL(0)),
 	METASPR_TERM
 };
@@ -195,7 +197,8 @@ const metasprite_t maeveSprite_metasprite3[] = {
 	METASPR_ITEM(0, 8, 1, S_PAL(0)),
 	METASPR_ITEM(8, -8, 15, S_PAL(0)),
 	METASPR_ITEM(0, 8, 16, S_PAL(0)),
-	METASPR_ITEM(8, -8, 17, S_PAL(0)),
+	METASPR_ITEM(0, 8, 4, S_PAL(0)),
+	METASPR_ITEM(8, -16, 17, S_PAL(0)),
 	METASPR_ITEM(0, 8, 18, S_PAL(0)),
 	METASPR_TERM
 };
@@ -205,7 +208,8 @@ const metasprite_t maeveSprite_metasprite4[] = {
 	METASPR_ITEM(0, 8, 10, S_PAL(0)),
 	METASPR_ITEM(8, -8, 19, S_PAL(0)),
 	METASPR_ITEM(0, 8, 20, S_PAL(0)),
-	METASPR_ITEM(8, -8, 21, S_PAL(0)),
+	METASPR_ITEM(0, 8, 4, S_PAL(0)),
+	METASPR_ITEM(8, -16, 21, S_PAL(0)),
 	METASPR_ITEM(0, 8, 22, S_PAL(0)),
 	METASPR_TERM
 };
@@ -215,7 +219,8 @@ const metasprite_t maeveSprite_metasprite5[] = {
 	METASPR_ITEM(0, 8, 1, S_PAL(0)),
 	METASPR_ITEM(8, -8, 15, S_PAL(0)),
 	METASPR_ITEM(0, 8, 16, S_PAL(0)),
-	METASPR_ITEM(8, -8, 23, S_PAL(0)),
+	METASPR_ITEM(0, 8, 4, S_PAL(0)),
+	METASPR_ITEM(8, -16, 23, S_PAL(0)),
 	METASPR_ITEM(0, 8, 24, S_PAL(0)),
 	METASPR_TERM
 };

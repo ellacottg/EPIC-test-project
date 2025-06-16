@@ -6,7 +6,6 @@
 #include "maeve.h"
 #include "common.h"
 #include "graphics/maeveSprite.h"
-#include "graphics/maeveSpriteLayout.h"
 
 #define MAEVE_MAX_SPEED 40
 #define MAEVE_ACCEL 1
@@ -192,15 +191,23 @@ uint8_t UpdateMaeve(void)
         setAnimation(maeveState);
     }
 
-    //We're going to draw only one of the first two sprites, depending on if she's shooting or not
-    layout = maeveSprite_layout[0];
-    if (maeveShooting) layout = maeveSprite_layout[1];
+    // this is the value that we will return to the main loop
+    uint8_t lastSprite = 0;
 
+    //We're going to use the first sprite for this since we already loaded the tiles in 0-6
     if(maeveFlip){
-        return move_metasprite_flipx(layout, 0, 0, 0, maeveX >> 4, maeveY >> 4);
+        lastSprite = move_metasprite_flipx(maeveSprite_metasprites[0], 0, 0, 0, maeveX >> 4, maeveY >> 4);
     }else{
-        return move_metasprite_ex(layout, 0, 0, 0, maeveX >> 4, maeveY >> 4);
+        lastSprite = move_metasprite_ex(maeveSprite_metasprites[0], 0, 0, 0, maeveX >> 4, maeveY >> 4);
     }
+
+    //hide the gun sprite if maeve is not shooting
+    if (!maeveShooting)
+    {
+        hide_sprite(4);
+    }
+
+    return lastSprite;
 }
 
 void setAnimation(enum State state)
