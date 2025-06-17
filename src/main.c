@@ -6,6 +6,8 @@
 #include "maeve.h"
 #include "common.h"
 
+extern uint16_t cameraX, cameraY, maeveX, maeveY;
+
 void main(void)
 {
     DISPLAY_ON;
@@ -27,6 +29,12 @@ void main(void)
         joypadCurrent = joypad();
 
         UpdateFourFrameCounter();
+
+        // center the camera on Maeve
+        cameraX = (maeveX >> 4) - (DEVICE_SCREEN_WIDTH << 2);
+        cameraY = (maeveY >> 4) - (DEVICE_SCREEN_HEIGHT * 6);
+
+        set_camera();
 
         lastSprite += UpdateMaeve();
 

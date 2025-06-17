@@ -1,4 +1,3 @@
 obj/
 .vscode/
-/graphics
-/levels
+raw/

@@ -20,16 +20,18 @@ endif
 PROJECTNAME := SuperSpacePrincess3
 
 SRCDIR      := src
-INCLUDEDIR  := headers
+DIR1        := src/headers
+DIR2		:= src/res
+INCLUDEDIR  := -I$(DIR1) -I$(DIR2)
 OBJDIR      := obj
 BINS	    := $(OBJDIR)/$(PROJECTNAME).gb
-CSOURCES    := $(wildcard src/*.c) $(wildcard src/graphics/*.c) $(wildcard src/levels/*.c)
-ASMSOURCES  := $(wildcard src/*.s) $(wildcard src/graphics/*.s) $(wildcard src/levels/*.s)
+CSOURCES    := $(wildcard src/*.c) $(wildcard src/res/graphics/*.c) $(wildcard src/res/levels/*.c)
+# ASMSOURCES  := $(wildcard src/*.s) $(wildcard src/graphics/*.s) $(wildcard src/levels/*.s)
 
 all: $(BINS)
 
-$(BINS): $(CSOURCES) $(ASMSOURCES)
-	$(LCC) $(LCCFLAGS) -I$(INCLUDEDIR) -o $@ $^
+$(BINS): $(CSOURCES) # $(ASMSOURCES)
+	$(LCC) $(LCCFLAGS) $(INCLUDEDIR) -o $@ $^
 
 clean:
 	del /s *.gb *.ihx *.cdb *.adb *.noi *.map

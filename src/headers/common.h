@@ -6,6 +6,6 @@
 
 void UpdateFourFrameCounter(void);
 
-extern uint8_t joypadCurrent, joypadPrevious, fourFrameRealValue, fourFrameChanged;
+extern uint8_t joypadCurrent, joypadPrevious, fourFrameRealValue, fourFrameChanged, NUMBER_OF_SOLID_TILES;
 
 #endif

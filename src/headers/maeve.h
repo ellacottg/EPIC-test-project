@@ -17,4 +17,6 @@ uint8_t UpdateMaeve(void);
 void LoadSprite(void);
 void setAnimation(enum State state);
 
+extern uint16_t maeveX, maeveY;
+
 #endif

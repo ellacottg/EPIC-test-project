@@ -6,6 +6,7 @@
 #include "maeve.h"
 #include "common.h"
 #include "graphics/maeveSprite.h"
+#include "camera.h"
 
 #define MAEVE_MAX_SPEED 40
 #define MAEVE_ACCEL 1
@@ -26,8 +27,9 @@
 #define MAEVE_SPRITE_COUNT 7
 
 extern uint8_t joypadCurrent, joypadPrevious, fourFrameRealValue;
+extern uint16_t cameraX, cameraY;
 
-uint16_t maeveX, maeveY;
+uint16_t maeveX = 0, maeveY = 0;
 uint8_t maeveFlip = FALSE;
 
 enum State maeveState = STATE_IDLE;
@@ -171,6 +173,10 @@ uint8_t UpdateMaeve(void)
         }
     }
 
+    // get the on-screen position of maeve
+    uint8_t maeveScreenX = (maeveX >> 4) - cameraX;
+    uint8_t maeveScreenY = (maeveY >> 4) - cameraY;
+
     //set the state based on the inputs
     if(maeveShooting){
         if (!maeveGrounded) maeveState = STATE_JUMPING_SHOOTING;
@@ -196,9 +202,9 @@ uint8_t UpdateMaeve(void)
 
     //We're going to use the first sprite for this since we already loaded the tiles in 0-6
     if(maeveFlip){
-        lastSprite = move_metasprite_flipx(maeveSprite_metasprites[0], 0, 0, 0, maeveX >> 4, maeveY >> 4);
+        lastSprite = move_metasprite_flipx(maeveSprite_metasprites[0], 0, 0, 0, maeveScreenX, maeveScreenY);
     }else{
-        lastSprite = move_metasprite_ex(maeveSprite_metasprites[0], 0, 0, 0, maeveX >> 4, maeveY >> 4);
+        lastSprite = move_metasprite_ex(maeveSprite_metasprites[0], 0, 0, 0, maeveScreenX, maeveScreenY);
     }
 
     //hide the gun sprite if maeve is not shooting
